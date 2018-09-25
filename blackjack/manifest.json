@@ -1,0 +1,20 @@
+{
+
+  "manifest_version": 2,
+  "name": "Blackjack",
+  "version": "1.0",
+
+  "description": "Various Addons for the QED-Chat.",
+
+  "icons": {
+    "48": "icons/qedlogo.png"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["*://chat.qed-verein.de/*"],
+      "js": ["main.js"]
+    }
+  ]
+
+}
