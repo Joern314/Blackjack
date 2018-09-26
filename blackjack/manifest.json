@@ -13,7 +13,9 @@
     "content_scripts": [
         {
             "matches": [
-                "https://chat.qed-verein.de/*"
+                "https://chat.qed-verein.de/index.html",
+                "https://chat.qed-verein.de/index.html?*",
+                "https://chat.qed-verein.de/?*"
             ],
             "js": ["main.js"],
             "run_at": "document_end"
@@ -21,7 +23,11 @@
     ],
 
     "web_accessible_resources": [
-        "addons/namecolor.js",
-        "js/md5.min.js"
+        "addons/*.js",
+        "js/*.js",
+        "js/*.js.map"
+    ],
+    
+    "permissions": [
     ]
 }

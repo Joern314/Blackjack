@@ -1,0 +1,19 @@
+.dropdown-content {
+    position: absolute;
+    display: none;
+    z-index: 1;
+    top: 15px;
+}
+.show {
+    display: block;
+}
+.dropdown-div {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.dropdown-line {
+    margin-bottom: 1em;
+    white-space: nowrap;
+}
