@@ -1,0 +1,18 @@
+#namedialogbox {
+    display: none;
+    position: fixed;
+    left: 1em;
+    right: 1em;
+    top: 1em;
+    z-index: 1;
+}
+
+#namedialogcolor {
+    display: none;
+}
+
+
+#namedialogbox p {
+    margin-top: 0;
+    margin-bottom: 0;
+}

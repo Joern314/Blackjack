@@ -76,9 +76,16 @@ function injectAddonsAndLibraries() {
     
     // inject our javascript addons
     injectLocalScript("addons/namecolor.js");
+    injectLocalScript("addons/namedialog.js");
+    injectLocalScript("addons/smallerbuttons.js");
+    injectLocalScript("addons/defaultoptions.js");
+
+    // inject shared addons
+    injectLocalScript("addons/colors.js");
 
     // inject our new stylesheets
     injectLocalCSS("css/namecolor.css");
+    injectLocalCSS("css/namedialog.css");
 
     // inject our javascript libraries
     injectLocalScript("js/md5.min.js");

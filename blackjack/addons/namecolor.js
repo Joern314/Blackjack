@@ -1,4 +1,4 @@
-/* global sendPart, options */
+/* global sendPart, options, ChatColor */
 
 window.addEventListener("load", OnInit_namecolor, false);
 
@@ -16,45 +16,19 @@ function OnInit_namecolor() {
 }
 
 function addUsername(name) {
-    let color = calcColor(name);
+    let color = ChatColor.get(name);
     usernames.push({name: name, color: color});
 }
 
 function recolorName() {
     let namePart = sendPart.getElementById("name");
     let name = namePart.value;
-    let colorHex = calcColor(name);
-    let color = PostColor({'color': colorHex});
-
-    namePart.style.color = "#" + color;
-}
-
-function calcColor(name) {
-    if (calcColor.map === undefined) {
-        calcColor.map = {};
-    }
-    if (calcColor.map[name] !== undefined) {
-        return calcColor.map[name];
-    }
-
-    let comp = function (a) {
-        let hash = md5(a + name + a);
-        function byteS(i) {
-            return hash.slice(2 * (i), 2 * (i + 1));
-        }
-        let subint = byteS(12) + byteS(13) + byteS(14) + byteS(15);
-        return (parseInt(subint, 16) & 0x0FFFFFFF) % 156 + 100;
-    };
-
-    let color = (comp('a') << 16) | (comp('b') << 8) | (comp('c'));
-
-    calcColor.map[name] = color.toString(16);
-
-    return calcColor.map[name];
+    let colorHex = ChatColor.getWithLayout(name);
+    namePart.style.color = "#" + colorHex;
 }
 
 function ModifyNameInput() {
-    const innerHTML = `
+/*    const innerHTML = `
         <label id="nameLabel" for="name">Name:</label>
     
         <div class="dropdown-div">
@@ -64,7 +38,7 @@ function ModifyNameInput() {
                 <label>Luise</label>
             </div>
         </div>
-     `;
+     `; 
     //        <input id="nameButton" value="Select" onclick="OnNameButtonClick()">
 
     // <p>
@@ -74,7 +48,7 @@ function ModifyNameInput() {
     elem.className = "dropdown-line";
     elem.innerHTML = innerHTML;
     
-    ppart.parentNode.replaceChild(elem, ppart);
+    ppart.parentNode.replaceChild(elem, ppart); */
     
     addCallbacks();
 }
@@ -97,16 +71,6 @@ function OnNameChange() {
 
 function OnNameInput() {
     recolorName();
-}
-
-function ToggleDropdown() {
-    let udc =
-            document.getElementById("usernamesContent");
-    if (udc.style.display === "none") {
-        udc.style.display = "block";
-    } else {
-        udc.style.display = "none";
-    }
 }
 
 function OnNameButtonClick() {
@@ -137,3 +101,4 @@ function rebuildUsernamesDatalist() {
         elem.appendChild(option);
     }
 }
+
