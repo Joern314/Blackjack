@@ -1,0 +1,26 @@
+
+<div id="namedialogbox" class="box"> 
+    <p> 
+        <input id="namedialogclose" type="button" value="Schließen" tabindex="100"
+               onclick="NameDialog.Close()">
+
+        <input id="namedialogfavourite" type="text" value="" tabindex="101"
+               list="favouritenames"
+               oninput="NameDialog.OnInput('namedialogfavourite')" >
+        <datalist id="favouritenames">
+        </datalist>
+
+        <input id="namedialogcolortext" type="text" value="none" size="5" tabindex="102"
+               onchange="NameDialog.OnChange('namedialogcolortext')">
+
+        <input id="namedialogcolor" type="color"
+               onchange="NameDialog.OnChange('namedialogcolor')"
+               oninput="NameDialog.OnInput('namedialogcolor')">
+        <input id="namedialogcolorbutton" type="button" tabindex="103" value=" " 
+               onclick="NameDialog.OpenColorChooser()">
+
+        <input id="namedialogclose2" type="button" value="Schließen" tabindex="104"
+               style="float:right;"
+               onclick="NameDialog.Close()">
+    </p>
+</div>

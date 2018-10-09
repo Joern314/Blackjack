@@ -24,6 +24,7 @@
 
     "web_accessible_resources": [
         "addons/*.js",
+        "html/*.html",
         "js/*.js",
         "js/*.js.map"
     ],
