@@ -80,6 +80,7 @@ function injectAddonsAndLibraries() {
     injectLocalScript("addons/namedialog.js");
     injectLocalScript("addons/smallerbuttons.js");
     injectLocalScript("addons/defaultoptions.js");
+    injectLocalScript("addons/forcecolor.js");
 
     // inject shared addons
     injectLocalScript("addons/colors.js");
