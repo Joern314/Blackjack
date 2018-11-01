@@ -25,6 +25,7 @@ let ForceColor = (function () {
         
         OverrideName('Ruben','d9e56a');        
         OverrideName('pfeifrub@in.tum.de','d9e56a');
+        OverrideName('Jörn','ffaa00');
         
         Blackjack.overwriteChatJS('PostColor', PostColor);
         
