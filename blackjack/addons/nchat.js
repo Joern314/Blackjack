@@ -171,6 +171,7 @@ let Blackjack = (function () {
                     addon.resources.every(f => resources[f] === true));
 
         if (newAddon !== undefined) {
+            console.log(`Starting Plugin: ${newAddon.name}`);
             newAddon.callback();
             newAddon.initialized = true;
             resources[newAddon.name] = true;

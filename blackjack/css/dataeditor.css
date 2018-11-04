@@ -1,0 +1,13 @@
+.editorbox {
+    display: none;
+    position: fixed;
+    left: 1em;
+    right: 1em;
+    top: 1em;
+    z-index: 1;
+}
+
+.editorbox p {
+    margin-top: 0;
+    margin-bottom: 0;
+}

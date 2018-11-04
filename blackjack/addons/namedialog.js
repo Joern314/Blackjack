@@ -97,7 +97,6 @@ let NameDialog = (function () {
     }
 
     function OnInit() {
-        console.log("Starting Plugin: namedialog.js");
         addFavouriteName("	 	  	    			  	    	 Jörn");
         addCallbacks();
     }
