@@ -60,39 +60,63 @@ function saveOldFunctions() {
     };
 }
 
+let Observables = new Proxy({
+    values: new Object(),
+    listeners: new Object(),
+    subscribe: function(key, callback) {
+        if(this.listeners[key] === undefined) this.listeners[key] = [];
+        this.listeners[key].push(callback);
+    },
+    unsubscribe: function(key, callback) {
+        if(this.listeners[key] === undefined) this.listeners[key] = [];
+        let index = this.listeners[key].indexOf(callback);
+        if(index !== undefined) this.listeners[key].splice(index, 1);
+    },
+    notify: function(key) {
+        if(this.listeners[key] === undefined) this.listeners[key] = [];
+        for(let i=0; i<this.listeners[key].length; i++) {
+            this.listeners[key][i](); //callback
+        }
+    }
+}, {
+    has: function (obj, prop) {
+        return prop in obj.values;
+    },
+    
+    get: function (obj, prop) {
+        if(prop in obj) {
+            return obj[prop];
+        } else if(prop in obj.values) {
+            return obj.values[prop];
+        } else {
+            return undefined;
+        }
+    },
+    set: function (obj, prop, value) {
+        if(prop in obj) {
+            obj[prop] = value;
+        } else {
+            let oldval = obj.values[prop];
+            obj.values[prop] = value;
+            if(oldval !== value) {
+                obj.notify(prop);
+            } else {}   //ignore if no change
+        }
+    }
+});
+
 // implement better event handling
 
 let Blackjack = (function () {
-    let observables = [
-        'name'      // form field
-    ];
+
     let methods = [
         'UpdateSettings' // to commit changes into URL  
     ];
 
     let resources = {};
     let addons = [];
-    
+
     let old = saveOldFunctions();
-
-    /**
-     * change value of observable, similar to onchange&oninput.
-     * Example: Blackjack.setObservable('name', 'Cybergirl');
-     * An event is fired to all observers.
-     * Default observers will reflect these changes upon the default form fields.
-     */
-    function setObservable(key, value, cause = undefined) {
-        let event = new CustomEvent('bj-set-' + key, {
-            detail: {
-                key: key,
-                operation: 'set',
-                value: value,
-                cause: cause
-            }
-        });
-
-        window.dispatchEvent(event);
-    }
 
     /**
      * similar to setObservable. does not have a value.
@@ -109,17 +133,14 @@ let Blackjack = (function () {
         window.dispatchEvent(event);
     }
 
-    function addObservator(key, callback) {
-        window.addEventListener('bj-set-' + key, callback, false);
-    }
-
     function addMethodListener(key, callback) {
         window.addEventListener('bj-call-' + key, callback, false);
     }
 
     function OnInit() {
         saveOldFunctions();
-        
+
+        loadDefaultObservables();
         redirectEventCallbacks();
         addDefaultObservers();
     }
@@ -127,24 +148,21 @@ let Blackjack = (function () {
     function redirectEventCallbacks() {
         let elem_name = document.getElementById('name');
         elem_name.onchange = function (event) {
-            setObservable('name', event.target.value, 'name.onchange');
+            Observables.name = event.target.value;
             callMethod('UpdateSettings', 'name.onchange');
         };
         elem_name.oninput = function (event) {
-            setObservable('name', event.target.value, 'name.oninput');
+            Observables.name = event.target.value;
         };
     }
 
+    function loadDefaultObservables() {
+        Observables.name = document.getElementById('name').value;
+    }
+
     function addDefaultObservers() {
-        // name field
-        addObservator('name', function (event) {
-            // detect if this event was caused by the gui.
-            if (event.detail.cause === 'name.onchange' || event.detail.cause === 'name.oninput') {
-                // no need to update document body
-            } else {
-                let elem_name = document.getElementById('name');
-                elem_name.value = event.detail.value;
-            }
+        Observables.subscribe('name', function () {
+            document.getElementById('name').value = Observables.name;
         });
 
         // when important settings were committed
@@ -166,15 +184,20 @@ let Blackjack = (function () {
 //        });
     }
 
+    function loadAddon(newAddon) {
+        console.log(`Starting Plugin: ${newAddon.name}`);
+        newAddon.callback();
+        newAddon.initialized = true;
+        resources[newAddon.name] = true;
+        console.log(`Done Starting Plugin: ${newAddon.name}`);
+    }
+
     function checkAddons() {
         let newAddon = addons.find(addon => (addon.initialized === false) &&
                     addon.resources.every(f => resources[f] === true));
 
         if (newAddon !== undefined) {
-            console.log(`Starting Plugin: ${newAddon.name}`);
-            newAddon.callback();
-            newAddon.initialized = true;
-            resources[newAddon.name] = true;
+            loadAddon(newAddon);
             checkAddons();    //recursive
         } else {
             //done
@@ -199,8 +222,6 @@ let Blackjack = (function () {
     return {
         OnInit: OnInit,
         addAddon: addAddon,
-        setObservable: setObservable,
-        addObservator: addObservator,
         resourceLoaded: resourceLoaded,
         overwriteChatJS: overwriteChatJS,
         old: old

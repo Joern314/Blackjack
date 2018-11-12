@@ -1,24 +1,44 @@
-/* global ChatColor, Blackjack */
+/* global ChatColor, Blackjack, Observables, DataEditor */
 
 let NameDialog = (function () {
     // list of favourite names
     let favouritenames = [];
+    // list of ids
+    const group = "namedialog";
 
-    function ToggleDropdown() {
-        let modal = document.getElementById("namedialogbox");
-        let color = document.getElementById("namedialogcolor");
-        let close = document.getElementById("namedialogclose");
-        let close2 = document.getElementById("namedialogclose2");
-        modal.style.display = "block";
-        let colorHex = "#" + ChatColor.getCurrent();
-        setNameDialogColor(parseColor(colorHex));
-        close.focus();
-    }
+    const id_modal = group + "_modal";
+    const id_close1 = group + "_close1";
+    const id_close2 = group + "_close1";
+    const id_fav_text = group + "_fav_text";
+    const id_fav_datalist = group + "_fav_datalist";
+    const id_color_text = group + "_color_text";
+    const id_color_chooser = group + "_color_chooser";
+    const id_color_button = group + "_color_button";
+    const obs_color = "obs_" + group + "_color";
 
-    function OpenColorChooser() {
-        let namedialogcolor = document.getElementById("namedialogcolor");
-        namedialogcolor.click();
-    }
+    // html code
+    const html_Head =
+            `
+        <input id="${id_close1}" type="button" value="Schließen" tabindex="100"
+               onclick="DataEditor.Close('${id_modal}')">
+        <input id="${id_fav_text}" type="text" value="" tabindex="101"
+               list="${id_fav_datalist}"
+               oninput="Observables['name']=this.value;" >
+        <datalist id="${id_fav_datalist}"></datalist>
+
+        <input id="${id_color_text}" type="text" value="none" size="5" tabindex="102"
+               onchange="Observables['${obs_color}']=NameDialog.parseColor(this.value)">
+
+        <input id="${id_color_chooser}" type="color" style="display:none;"
+               onchange="Observables['${obs_color}']=NameDialog.parseColor(this.value)"
+               oninput="Observables['${obs_color}']=NameDialog.parseColor(this.value)">
+        <input id="${id_color_button}" type="button" tabindex="103" value=" " 
+               onclick="document.getElementById('${id_color_chooser}').click()">
+
+        <input id="${id_close2}" type="button" value="Schließen" tabindex="104"
+               style="float:right;"
+               onclick="DataEditor.Close('${id_modal}')">
+    `;
 
     function parseColor(colorHex) {
         if (/^([0-9a-fA-F]{6})$/.test(colorHex)) {
@@ -38,114 +58,78 @@ let NameDialog = (function () {
         }
 
         if (colorHex) {
-            return {text: colorHex, color: colorHex};
+            return colorHex;
         } else {
-            return {text: "none", color: "#646464"};
+            return "#646464";
         }
-    }
-
-    function setNameDialogColor(colorHex) {
-        let color = document.getElementById("namedialogcolor");
-        let colortext = document.getElementById("namedialogcolortext");
-        let colorbutton = document.getElementById("namedialogcolorbutton");
-        color.value = colorHex.color;
-        colortext.value = colorHex.text;
-        colortext.style['color'] = colorHex.color;
-        colorbutton.style['background-color'] = colorHex.color;
     }
 
     function addFavouriteName(name) {
-        let favouritenames = document.getElementById("favouritenames");
         let child = document.createElement('option');
         child.value = name;
-        favouritenames.appendChild(child);
+        document.getElementById(id_fav_datalist).appendChild(child);
     }
 
-    function Close() {
-        let modal = document.getElementById("namedialogbox");
-        modal.style.display = "none";
-        
+
+// add suggestions to the vanilla name-field
+    function patchNameField() {
         let name = document.getElementById("name");
-        name.focus();
-    }
+        name.setAttribute("list", id_fav_datalist);
+        name.setAttribute("type","text");
 
-    function OnObservableChange(event) {
-        switch (event.detail.key) {
-            case 'name':
-                let namedialogfavourite = document.getElementById("namedialogfavourite");
-                namedialogfavourite.value = event.detail.value; // fill new value
-                break;
-        }
+        let label = Array.from(document.getElementsByTagName("label"))
+                .filter(l => l.htmlFor === "name")[0];
+        
+        label.setAttribute("tabIndex", "0");
+        label.addEventListener('keypress', function (event) {
+            //down: event.keyCode === 40 || 
+            if (event.keyCode === 38 || event.keyCode === 40
+                    || event.keyCode === 13) { // up,down,enter
+                DataEditor.Open(id_modal);
+            }
+        }, false);
     }
 
     function addCallbacks() {
-        let name = document.getElementById("name");
-        name.addEventListener('keypress', function (event) {
-            if (event.keyCode === 38 || event.keyCode === 40) { // down or up
-                ToggleDropdown();
-            }
-        }, false);
-        
-        let modal = document.getElementById("namedialogbox");
-        modal.addEventListener('keypress', function (event) {
-            if (event.keyCode === 27) { // escape
-                Close();
-            }
-        }, false);
+        Observables.subscribe('name', function () {
+            document.getElementById(id_fav_text).value = Observables.name; // fill new value
+            Observables[obs_color] = NameDialog.parseColor(ChatColor.calc(Observables.name));
+        });
 
-        Blackjack.addObservator('name', OnObservableChange);
+        Observables.subscribe(obs_color, function () {
+            document.getElementById(id_color_chooser).value =
+                    document.getElementById(id_color_text).value =
+                    document.getElementById(id_color_text).style['color'] =
+                    document.getElementById(id_color_button).style['background-color']
+                    = Observables[obs_color];
+        });
+    }
+
+
+    function CreateModal() {
+        let modal = DataEditor.CreateNodeForModal(id_modal, html_Head, "");
+        modal.focus_open = id_close1;
+        modal.focus_close = "name";
+        
+        DataEditor.Open(id_modal);
     }
 
     function OnInit() {
-        addFavouriteName("	 	  	    			  	    	 Jörn");
+        CreateModal();
+        patchNameField();
         addCallbacks();
-    }
-
-    function OnInput(obj) {
-        switch (obj) {
-            case 'namedialogfavourite':
-            {
-                let namedialogfavourite = document.getElementById("namedialogfavourite");
-                Blackjack.setObservable('name', namedialogfavourite.value, 'namedialogfavourite.oninput');
-                break;
-            }
-            case 'namedialogcolor':
-            {
-                let color = document.getElementById("namedialogcolor");
-                let colorHex = parseColor(color.value);
-                setNameDialogColor(colorHex);
-            }
-        }
-    }
-
-    function OnChange(obj) {
-        switch (obj) {
-            case 'namedialogcolortext':
-            {
-                let namedialogcolortext = document.getElementById("namedialogcolortext");
-                let colorHex = parseColor(namedialogcolortext.value);
-                setNameDialogColor(colorHex);
-                break;
-            }
-            case 'namedialogcolor':
-            {
-                let namedialogcolor = document.getElementById("namedialogcolor");
-                let colorHex = parseColor(namedialogcolor.value);
-                setNameDialogColor(colorHex);
-                break;
-            }
-        }
+        
+        addFavouriteName("Gerücht");
+        addFavouriteName("	 	  	    			  	    	 Jörn");
     }
 
     return {
         OnInit: OnInit,
-        Close: Close,
-        OnInput: OnInput,
-        OnChange: OnChange,
-        OpenColorChooser: OpenColorChooser
+        parseColor: parseColor
     };
 })();
 
 window.addEventListener("load", function () {
-    Blackjack.addAddon("addons/namedialog.js", NameDialog.OnInit, ["html/namedialog.html"]);
+    Blackjack.addAddon("addons/namedialog.js", NameDialog.OnInit, []);
+    //["html/namedialog.html"]);
 }, false);

@@ -1,16 +1,10 @@
-/* global ChatColor, Blackjack */
+/* global ChatColor, Blackjack, Observables */
 
 let NameColor = (function () {
     function OnInit() {
-        console.log("Starting Plugin: namecolor.js");
-        
-        Blackjack.addObservator('name', function(event) {
-            // set new color
-            let newValue = event.detail.value;
-            recolor(newValue);
+        Observables.subscribe('name', function() {
+            recolor(Observables.name);
         });
-        
-        console.log("done starting plugin");
     }
     
     function recolor(newValue) {

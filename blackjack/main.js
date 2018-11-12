@@ -82,6 +82,7 @@ function injectAddonsAndLibraries() {
     injectLocalScript("addons/smallerbuttons.js");
     injectLocalScript("addons/defaultoptions.js");
     injectLocalScript("addons/forcecolor.js");
+    injectLocalScript("addons/colorscheme.js");
 
     // inject shared addons
     injectLocalScript("addons/colors.js");
@@ -95,7 +96,7 @@ function injectAddonsAndLibraries() {
     injectLocalScript("js/md5.min.js");
 
     // inject our additions to the dom-tree via small scripts
-    injectLocalHTML("html/namedialog.html");
+//    injectLocalHTML("html/namedialog.html");
 
     // then issue the addons to Init
     initAddons();
