@@ -17,7 +17,8 @@ None
 git clone https://github.com/Joern314/Blackjack.git
 ```
 
-2. Follow the instructions of https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Your_first_WebExtension#Installing
+2. Follow the instructions on 
+https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Your_first_WebExtension#Installing
 
    1. Open firefox
 
@@ -31,20 +32,45 @@ git clone https://github.com/Joern314/Blackjack.git
 
 4. You need to do repeat steps 2 and 3 after every restart of firefox.
 
-## UPDATES & EXPERIMENTING
+## UPDATES
 
-Any changes to `blackjack/manifest.json` and `blackjack/main.js` require you to press the `reload` text in the `about:debugging` page under "Temporary Extensions".
+Any changes to `blackjack/manifest.json` and `blackjack/main.js` require you to press the `reload` text in 
+the `about:debugging` page under "Temporary Extensions".
 
 Any changes to the other files, including the `blackjack/addons/*.js`, will be reflected after simply reloading the tabs.
 
 For now no auto-updates are implemented, and I don't exactly feel like enabling them per default in the future.
 
+### UPDATING VIA GIT
+
+If you cloned this repository, you should be able to simply pull the newest version. Navigate to the root folder of Blackjack. 
+You should see the `README.md` and the folders `blackjack` and `nbproject`. 
+
+Then pull, and check [UPDATES](#updates) for how to reload Blackjack.
+```
+git pull
+```
+
 ## USING BLACKJACK
 
 Blackjack is highly experimental for now, unstable and highly broken.
 
+### FEEDBACK
+
+Give me feedback! You can ask me to add things to the TODO-List, or simply use 
+all those unknown features of github to send me messages and bug reports.
+
+However: remember that Blackjack is experimental, so don't bother me with *obvious* things,
+unless you can present an elegant solution as well. In that case you might want to consider
+forking an sending a pull-request.
+
 ### COLLECTED DATA
 
-None, I think. In near future Blackjack will use local storage on your computer to save your settings, but it won't send anything to me.
-I do not guarantee any form of safety, though, especially if you visit 3rd party sites that contain iframes of qed-chat or similar weird shit.
+None, I think. In near future Blackjack will use local storage on your computer to save your settings, 
+but it won't send anything to me.
+
+### SAFETY
+
+I do not guarantee any form of safety, especially if you visit 3rd party sites that contain 
+iframes of qed-chat or similar weird shit.
 Report any security concerns to me at once, best with a suggestion what design pattern to use instead!
