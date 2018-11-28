@@ -21,9 +21,9 @@ git clone https://github.com/Joern314/Blackjack.git
 
    1. Open firefox
 
-   2. Open "about:debugging" in the addressbar
+   2. Open [about:debugging](about:debugging) in the addressbar
 
-   3. Click "load temprary addons". Blackjack should be listed under "Temporary Extensions" now.
+   3. Click "load temporary addons". Blackjack should be listed under "Temporary Extensions" now.
 
    4. Navigate to the folder with this repository, select any file. For example: "manifest.json"
 
@@ -33,7 +33,7 @@ git clone https://github.com/Joern314/Blackjack.git
 
 ## UPDATES & EXPERIMENTING
 
-Any changes to manifest.json and "nchat.js" require you to press the "reload" text in the "about:debugging" page under "Temporary Extensions".
+Any changes to manifest.json and "nchat.js" require you to press the "reload" text in the [about:debugging](about:debugging) page under "Temporary Extensions".
 
 Any changes to the other ".js" files will be reflected after simply reloading the tabs.
 
