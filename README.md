@@ -19,13 +19,13 @@ git clone https://github.com/Joern314/Blackjack.git
 
 2. Follow the instructions of https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Your_first_WebExtension#Installing
 
-  1. Open firefox
+   1. Open firefox
 
-  2. Open "about:debugging" in the addressbar
+   2. Open "about:debugging" in the addressbar
 
-  3. Click "load temprary addons". Blackjack should be listed under "Temporary Extensions" now.
+   3. Click "load temprary addons". Blackjack should be listed under "Temporary Extensions" now.
 
-  4. Navigate to the folder with this repository, select any file. For example: "manifest.json"
+   4. Navigate to the folder with this repository, select any file. For example: "manifest.json"
 
 3. Reload the tabs with the chat, or open a new one
 
