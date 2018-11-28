@@ -13,28 +13,12 @@ let ColorScheme = (function () {
 
     const default_colors = 
     `{
-        "special": {
-            "background": "#0B1D2F",
-            "foreground": "#c6eef3",
-            "cursor": "#c6eef3"
-        },
         "colors": {
-            "color0": "#0B1D2F",
-            "color1": "#116D91",
-            "color2": "#4F708B",
-            "color3": "#1A91A9",
-            "color4": "#35BAD0",
-            "color5": "#5BE4F5",
-            "color6": "#A6AEAD",
-            "color7": "#c6eef3",
-            "color8": "#8aa6aa",
-            "color9": "#116D91",
-            "color10": "#4F708B",
-            "color11": "#1A91A9",
-            "color12": "#35BAD0",
-            "color13": "#5BE4F5",
-            "color14": "#A6AEAD",
-            "color15": "#c6eef3"
+            "background": "#00ff00",
+            "background_box": "##ff00ff",
+            "border": "#0000ff",
+            "text_userid": "#ffff00",
+            "text_message": "#ff0000"
         }
     }`;
 
@@ -79,25 +63,19 @@ let ColorScheme = (function () {
     }
     
     function createCSS(name, obj) {
-        let colors = {  //apfelweis, nachtschwarz
-            bg_0: obj.colors.color0, // #eee 000
-            br_0: obj.colors.color1, // #aaa 666
-            fg_0: obj.special.foreground, // #444 ccc
-            bg_1: obj.special.background, // #ddd 111
-            fg_1: obj.special.color1,  // #333
-            theme: this.bg_1
-        };
+        let colors = obj.colors;
+        
         let css = `
 .${name}, .${name} input, .${name} textarea, .${name} select
 {
 	color: ${colors.fg_0};
-	background-color: ${colors.bg_0};
+	background-color: ${colors.background};
 	border-color: ${colors.br_0};
 }
 
 .${name} .box
 {
-	background-color: ${colors.bg_1};
+	background-color: ${colors.background_box};
 	border-color: ${colors.br_0};
 }
 
