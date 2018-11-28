@@ -21,21 +21,21 @@ git clone https://github.com/Joern314/Blackjack.git
 
    1. Open firefox
 
-   2. Open [about:debugging](about:debugging) in the addressbar
+   2. Open `about:debugging` in the addressbar
 
-   3. Click "load temporary addons". Blackjack should be listed under "Temporary Extensions" now.
+   3. Click `load temporary addons`. Blackjack should be listed under "Temporary Extensions" now.
 
-   4. Navigate to the folder with this repository, select any file. For example: "manifest.json"
+   4. Navigate to the subfolder `blackjack` within this repository, select any file, e.g. `blackjack/manifest.json`
 
-3. Reload the tabs with the chat, or open a new one
+3. Reload the tabs with the chat, or simply open a new one.
 
 4. You need to do repeat steps 2 and 3 after every restart of firefox.
 
 ## UPDATES & EXPERIMENTING
 
-Any changes to manifest.json and "nchat.js" require you to press the "reload" text in the [about:debugging](about:debugging) page under "Temporary Extensions".
+Any changes to `blackjack/manifest.json` and `blackjack/main.js` require you to press the `reload` text in the `about:debugging` page under "Temporary Extensions".
 
-Any changes to the other ".js" files will be reflected after simply reloading the tabs.
+Any changes to the other files, including the `blackjack/addons/*.js`, will be reflected after simply reloading the tabs.
 
 For now no auto-updates are implemented, and I don't exactly feel like enabling them per default in the future.
 
