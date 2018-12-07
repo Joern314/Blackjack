@@ -1,21 +1,30 @@
 {
+    "name": "Blackjack",
+    "version": "1.0.0",
+    "description": "Various Addons for the QED-Chat.",
 
     "manifest_version": 2,
-    "name": "Blackjack",
-    "version": "1.0",
-
-    "description": "Various Addons for the QED-Chat.",
+    "permissions": [],
 
     "icons": {
         "48": "icons/qedlogo.png"
     },
 
+    "applications": {
+        "gecko": {
+            "id": "blackjack@j.stoehler.eu",
+            "update_url": "https://joern314.github.io/Blackjack/blackjack/updates.json"
+        }
+    },
+
     "content_scripts": [
         {
             "matches": [
+                "https://chat.qed-verein.de/?*",
                 "https://chat.qed-verein.de/index.html",
                 "https://chat.qed-verein.de/index.html?*",
-                "https://chat.qed-verein.de/?*"
+                "https://chat.qed-verein.de/history.html",
+                "https://chat.qed-verein.de/history.html?*"
             ],
             "js": ["main.js"],
             "run_at": "document_end"
@@ -27,8 +36,5 @@
         "html/*.html",
         "js/*.js",
         "js/*.js.map"
-    ],
-    
-    "permissions": [
     ]
 }

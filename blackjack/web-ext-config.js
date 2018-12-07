@@ -5,8 +5,10 @@ module.exports = {
         'todo'
     ],
     // Global options:
-    verbose: true,
     // Command options:
+    lint: {
+        selfHosted: true
+    },
     build: {
         overwriteDest: true
     }
