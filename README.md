@@ -12,6 +12,17 @@ None
 
 ### INSTALLATION - FIREFOX
 
+Blackjack can be either from an `.xpi` file or from the source. Latter option only temporarily adds Blackjack, and is better suited for testing and debugging.
+
+#### AUTOMATIC INSTALLATION
+
+Click this [link](https://joern314.github.io/Blackjack/blackjack/web-ext-artifacts/release-newest.xpi). 
+You should be asked whether you want to install the addon `Blackjack`.
+
+#### MANUAL INSTALLATION FROM SOURCE
+
+Alternatively you can install a local version of Blackjack from the source.
+
 1. Clone this git repository / download as zip and unpack
 ```
 git clone https://github.com/Joern314/Blackjack.git
@@ -34,6 +45,12 @@ https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Your_firs
 
 ## UPDATES
 
+### AUTOMATIC INSTALLATION
+
+Firefox will look for new updates every 24 hours or so.
+
+### MANUAL INSTALLATION FROM SOURCE
+
 Any changes to `blackjack/manifest.json` and `blackjack/main.js` require you to press the `reload` text in 
 the `about:debugging` page under "Temporary Extensions".
 
@@ -41,7 +58,7 @@ Any changes to the other files, including the `blackjack/addons/*.js`, will be r
 
 For now no auto-updates are implemented, and I don't exactly feel like enabling them per default in the future.
 
-### UPDATING VIA GIT
+#### UPDATING VIA GIT
 
 If you cloned this repository, you should be able to simply pull the newest version. Navigate to the root folder of Blackjack. 
 You should see the `README.md` and the folders `blackjack` and `nbproject`. 
