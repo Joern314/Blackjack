@@ -4,7 +4,7 @@
             "updates": [
                 {
                     "version": "1.0.0",
-                    "update_link": "https://github.com/Joern314/Blackjack/blob/master/blackjack/web-ext-artifacts/blackjack-1.0.0-an+fx.xpi",
+                    "update_link": "https://joern314.github.io/Blackjack/blackjack/web-ext-artifacts/blackjack-1.0.0-an+fx.xpi",
                     "update_hash": "sha256:7ae0ff27a21832e7fbac9c7eea6e847a8f454febf6f0cc69a0a55d228ca0c479"
                 }
             ]
