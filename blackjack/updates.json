@@ -1,0 +1,13 @@
+{
+    "addons": {
+        "Blackjack": {
+            "updates": [
+                {
+                    "version": "1.0.0",
+                    "update_link": "https://joern314.github.io/Blackjack/blackjack/web-ext-artifacts/blackjack-1.0.0-an+fx.xpi",
+                    "update_hash": "sha256:blahblah"
+                }
+            ]
+        }
+    }
+}
