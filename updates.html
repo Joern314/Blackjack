@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <title>Updates For Blackjack</title>
+        <meta name="robots" content="noindex, nofollow">
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <script type="text/javascript">
+            const updatesUrl = "https://joern314.github.io/Blackjack/blackjack/updates.json";
+            fetch(updatesUrl).then(data => data.json()).then(json =>
+                json.addons.Blackjack.updates.forEach(upd => {
+                    let node = document.createElement("a");
+                    node.href = upd.update_link;
+                    node.value = `Blackjack Version ${upd.version}`;
+                    
+                    let box = document.getElementById("update-box");
+                    box.appendChild(node);
+                })
+            );
+        </script>
+    </head>
+    <body>
+    <span>After clicking a link you should be asked whether to install Blackjack.</span>
+    <div id="update-box">
+        
+    </div>
+</body>
+</html>

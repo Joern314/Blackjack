@@ -16,7 +16,8 @@ Blackjack can be either from an `.xpi` file or from the source. Latter option on
 
 #### AUTOMATIC INSTALLATION
 
-Click this [link](https://joern314.github.io/Blackjack/blackjack/web-ext-artifacts/release-newest.xpi). 
+Click this [link]( https://joern314.github.io/Blackjack/updates.html )
+and select the newest version (bottom).
 You should be asked whether you want to install the addon `Blackjack`.
 
 #### MANUAL INSTALLATION FROM SOURCE
