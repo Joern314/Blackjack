@@ -1,6 +1,6 @@
 {
     "name": "Blackjack",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "Various Addons for the QED-Chat.",
 
     "manifest_version": 2,
