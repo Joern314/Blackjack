@@ -26,7 +26,7 @@ let ColorScheme = (function () {
     const html_Head =
             `
         <input id="${id_close1}" type="button" value="Schließen" tabindex="100"
-               onclick="DataEditor.Close('${id_modal}')">
+               onclick="Observables['menu']=''">
         <label>Custom Color-Scheme</label>
     `;
 
@@ -105,7 +105,7 @@ let ColorScheme = (function () {
         modal.focus_open = id_close1;
         modal.focus_close = "message";
 
-        DataEditor.Open(id_modal);
+        ////DataEditor.Open(id_modal);
     }
 
     function OnInit() {

@@ -83,6 +83,8 @@ function injectAddonsAndLibraries() {
     injectLocalScript("addons/defaultoptions.js");
     injectLocalScript("addons/forcecolor.js");
     injectLocalScript("addons/colorscheme.js");
+    injectLocalScript("addons/infinitescrolling.js");
+    injectLocalScript("addons/removesettings.js");
 
     // inject shared addons
     injectLocalScript("addons/colors.js");

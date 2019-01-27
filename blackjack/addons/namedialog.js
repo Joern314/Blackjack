@@ -20,7 +20,7 @@ let NameDialog = (function () {
     const html_Head =
             `
         <input id="${id_close1}" type="button" value="Schließen" tabindex="100"
-               onclick="DataEditor.Close('${id_modal}')">
+               onclick="Observables['menu']=''">
         <input id="${id_fav_text}" type="text" value="" tabindex="101"
                list="${id_fav_datalist}"
                oninput="Observables['name']=this.value;" >
@@ -37,7 +37,7 @@ let NameDialog = (function () {
 
         <input id="${id_close2}" type="button" value="Schließen" tabindex="104"
                style="float:right;"
-               onclick="DataEditor.Close('${id_modal}')">
+               onclick="Observables['menu']=''">
     `;
 
     function parseColor(colorHex) {
@@ -85,7 +85,7 @@ let NameDialog = (function () {
             //down: event.keyCode === 40 || 
             if (event.keyCode === 38 || event.keyCode === 40
                     || event.keyCode === 13) { // up,down,enter
-                DataEditor.Open(id_modal);
+                ////DataEditor.Open(id_modal);
             }
         }, false);
     }
@@ -111,7 +111,7 @@ let NameDialog = (function () {
         modal.focus_open = id_close1;
         modal.focus_close = "name";
         
-        DataEditor.Open(id_modal);
+        //DataEditor.Open(id_modal);
     }
 
     function OnInit() {

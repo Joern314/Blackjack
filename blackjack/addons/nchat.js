@@ -72,10 +72,10 @@ let Observables = new Proxy({
         let index = this.listeners[key].indexOf(callback);
         if(index !== undefined) this.listeners[key].splice(index, 1);
     },
-    notify: function(key) {
+    notify: function(key, oldval=undefined, newval=undefined) {
         if(this.listeners[key] === undefined) this.listeners[key] = [];
         for(let i=0; i<this.listeners[key].length; i++) {
-            this.listeners[key][i](); //callback
+            this.listeners[key][i](oldval,newval); //callback
         }
     }
 }, {
@@ -99,7 +99,7 @@ let Observables = new Proxy({
             let oldval = obj.values[prop];
             obj.values[prop] = value;
             if(oldval !== value) {
-                obj.notify(prop);
+                obj.notify(prop, oldval, value);
             } else {}   //ignore if no change
         }
     }

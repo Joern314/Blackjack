@@ -1,32 +1,66 @@
-/* global  Blackjack */
+/* global  Blackjack, Observables, RemoveSettings */
 
 let DataEditor = (function () {
-    let modals = {};
+    let modals = new Map();
     
     function OnInit() {
+        injectModalList();
     }
     
-    function Close(id_modal) {
-        let modal = modals[id_modal];
+    function nClose(id_modal) {
+        let modal = modals.get(id_modal);
+//      document.getElementById(id_modal).style.visibility = "hidden";
         document.getElementById(id_modal).style.display = "none";
+//        document.getElementById(id_modal).hidden = true;
         
         if(modal.focus_close !== undefined) {
             document.getElementById(modal.focus_close).focus();
         }
     }
     
-    function Keypress(name, event) {
-        if (event.keyCode === 27) { // escape
-            Close(name);
-        }
-    }
-    
-    function Open(id_modal) {
-        let modal = modals[id_modal];
+    function nOpen(id_modal) {
+        let modal = modals.get(id_modal);
+//        document.getElementById(id_modal).style.visibility = "visible";
         document.getElementById(id_modal).style.display = "block";
+//        document.getElementById(id_modal).hidden = true;
         
         if(modal.focus_open !== undefined) {
             document.getElementById(modal.focus_open).focus();
+        }
+    }
+    
+    function Close(oldmenu) {
+        switch(oldmenu) {
+            case undefined:
+            case "":
+                break;
+            case "settings":
+            case "logs":
+                window.ShowMenu('');
+                break;
+            default:
+                nClose(oldmenu);
+                break;
+        }
+    }
+    function Open(newmenu) {
+        switch(newmenu) {
+            case undefined:
+            case "":
+                break;
+            case "settings":
+            case "logs":
+                window.ShowMenu(newmenu);
+                break;
+            default:
+                nOpen(newmenu);
+                break;
+        }
+    }
+
+    function Keypress(name, event) {
+        if (event.keyCode === 27) { // escape
+            Close(name);
         }
     }
     
@@ -76,14 +110,38 @@ let DataEditor = (function () {
         </div>
         `;
         
+//        node.style.display = "none"; //don't -> wrong layout
         document.body.appendChild(node);
+//        node.style.visibility = "hidden";
+//        node.hidden = true;
+//        node.style.display = "none"; //don't -> wrong layout
         
-        modals[id_modal] = {
+        modals.set(id_modal, {
             id: id_modal,
             focus_open: undefined,
             focus_close: "message"
-        };
-        return modals[id_modal];
+        });
+        
+        registerWithSelect(id_modal, id_modal);
+        
+        return modals.get(id_modal);
+    }
+    
+    function injectModalList() {
+        document.getElementById("showsettingsbutton").onclick= (e) => Observables.menu="settings";
+        document.getElementById("showlogsbutton").onclick= (e) => Observables.menu="logs";
+        Observables.subscribe("menu", (oldmenu, newmenu) => {
+            Close(oldmenu);
+            Open(newmenu);
+            document.getElementById("menuselect").value = newmenu;
+        });
+        
+        RemoveSettings.AddSelect("menuselect", "menu", "AddOn: ", [["None",""]]);
+    }
+    
+    function registerWithSelect(modalname, modal){
+        let stub = document.getElementById("menuselect");
+        stub.add(new Option(modalname, modal));
     }
 
     return {
