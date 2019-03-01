@@ -8,7 +8,7 @@ const Ignore = function () {
         return name.normalize().trim().toLowerCase();
     }
     function isHidden(post) {
-        if(Observables["ignoreflag"] === false) {
+        if(Observables["ignoreflag"] == false) {
             return false; // deactivated
         }
         return hiddenNames.includes(norm(post["name"]));
@@ -60,6 +60,9 @@ const Ignore = function () {
         Blackjack.overwriteChatJS('FormatMobilePost', new_FormatMobilePost);
         
         RemoveSettings.AddCheckbox("ignoreflag","ignoreflag","ignore");
+        Observables.subscribe("ignoreflag", function(){
+            window.RecreatePosts();
+        });
 
         if(localStorage["hiddenNames"] != null) {
             let old = JSON.parse(localStorage["hiddenNames"]);
