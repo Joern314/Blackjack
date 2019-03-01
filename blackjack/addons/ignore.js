@@ -36,10 +36,7 @@ const Ignore = function () {
             return;
         }
 
-        if (options['layout'] == 'mobile')
-            container.appendChild(window.FormatMobilePost(post));
-        else
-            container.appendChild(window.FormatScreenPost(post));
+        Blackjack.old.AppendPost(post);
     }
 
     function hideContent(post) {
@@ -76,7 +73,6 @@ const Ignore = function () {
 
         Blackjack.overwriteChatJS('FormatScreenPost', new_FormatScreenPost);
         Blackjack.overwriteChatJS('FormatMobilePost', new_FormatMobilePost);
-        Blackjack.overwriteChatJS('AppendPost', new_AppendPost);
 
         RemoveSettings.AddCheckbox("ignoreflag", "ignoreflag", "ignore");
         Observables.subscribe("ignoreflag", function () {
@@ -92,6 +88,8 @@ const Ignore = function () {
             hiddenNames = [];
             console.log("no stored hidden names found.");
         }
+
+        Blackjack.overwriteChatJS('AppendPost', new_AppendPost);
     }
 
     return {
