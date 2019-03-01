@@ -76,6 +76,7 @@ function injectAddonsAndLibraries() {
     injectLocalScript("addons/nchat.js");
 
     // inject our javascript addons
+    injectLocalScript("addons/ignore.js");
     injectLocalScript("addons/namecolor.js");
     injectLocalScript("addons/dataeditor.js");
     injectLocalScript("addons/namedialog.js");

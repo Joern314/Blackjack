@@ -80,5 +80,5 @@ const Ignore = function () {
 }();
 
 window.addEventListener("load", function(){
-    Blackjack.addAddon("addons/ignore.js", Ignore.OnInit, []);
+    Blackjack.addAddon("addons/ignore.js", Ignore.OnInit, ["addons/removesettings.js"]);
 }, false);
