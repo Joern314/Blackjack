@@ -28,13 +28,7 @@ const Ignore = function () {
         window.RecreatePosts();
     }
 
-    function new_AppendPost(post) {
-        if (post === undefined || post === null)
-            return;
-
-        if (post["name"] === undefined)
-            return;
-
+    function new_AppendPost(container, post) {
         if (options['botblock'] && post['bottag'] == '1')
             return;
 
@@ -42,7 +36,7 @@ const Ignore = function () {
             return;
         }
 
-        Blackjack.old.AppendPost(post);
+        Blackjack.old.AppendPost(container, post);
     }
 
     function hideContent(post) {
@@ -77,8 +71,8 @@ const Ignore = function () {
         console.log("Hover above the ID-Field to see name of hidden poster.");
         console.log("Good luck.");
 
-        Blackjack.overwriteChatJS('FormatScreenPost', new_FormatScreenPost);
-        Blackjack.overwriteChatJS('FormatMobilePost', new_FormatMobilePost);
+        //Blackjack.overwriteChatJS('FormatScreenPost', new_FormatScreenPost);
+        //Blackjack.overwriteChatJS('FormatMobilePost', new_FormatMobilePost);
 
         RemoveSettings.AddCheckbox("ignoreflag", "ignoreflag", "ignore");
         Observables.subscribe("ignoreflag", function () {

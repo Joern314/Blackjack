@@ -46,7 +46,13 @@
                     "version": "0.1.9", 
                     "update_link": "https://joern314.github.io/Blackjack/blackjack/web-ext-artifacts/blackjack-0.1.9-an+fx.xpi", 
                     "update_hash": "sha256:934904b83866cbecbcaee57b72950f0252e2c13b407bd834bc8d72a9a70bf63e" 
+                },
+                {
+                    "version": "0.1.10", 
+                    "update_link": "https://joern314.github.io/Blackjack/blackjack/web-ext-artifacts/blackjack-0.1.10-an+fx.xpi", 
+                    "update_hash": "sha256:fb7afd912773d376efb9d6a3faef01a1ed1a6f2bfcffc90c506b8ee4fc9c5dee" 
                 }
+                    
             ]
         }
     }
