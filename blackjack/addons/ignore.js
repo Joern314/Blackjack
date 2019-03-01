@@ -29,6 +29,12 @@ const Ignore = function () {
     }
 
     function new_AppendPost(post) {
+        if (post === undefined || post === null)
+            return;
+
+        if (post["name"] === undefined)
+            return;
+
         if (options['botblock'] && post['bottag'] == '1')
             return;
 
