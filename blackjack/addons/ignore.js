@@ -5,13 +5,17 @@ const Ignore = function () {
     let hiddenNames = [];
 
     function norm(name) {
+        if(!name) {
+            return undefined;
+        }
         return name.normalize().trim().toLowerCase();
     }
     function isHidden(post) {
-        if (Observables["ignoreflag"] == false) {
+        if (Observables["ignoreflag"] == true) {
+            return hiddenNames.includes(norm(post["name"]));
+        }else{
             return false; // deactivated
         }
-        return hiddenNames.includes(norm(post["name"]));
     }
     function addHiddenName(name) {
         hiddenNames.push(norm(name));
