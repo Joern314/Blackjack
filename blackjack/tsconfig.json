@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "outDir": "out",
+        "sourceMap": true,
+    },
+    "exclude": [
+        "css", "html", "icons", "official", "web-ext-artifacts"
+    ],
+    "include": [
+        "**/*"
+    ],
+    "typeAcquisition": {
+        "enable": true
+    }
+}
