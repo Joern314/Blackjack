@@ -153,6 +153,8 @@ let DataEditor = (function () {
     };
 })();
 
+/**
 window.addEventListener("load", function () {
     Blackjack.addAddon("addons/dataeditor.js", DataEditor.OnInit, []);
 }, false);
+*/

@@ -118,7 +118,10 @@ let ColorScheme = (function () {
     };
 })();
 
-window.addEventListener("load", function () {
+/**
+ * window.addEventListener("load", function () {
     Blackjack.addAddon("addons/colorscheme.js", ColorScheme.OnInit, ["addons/dataeditor.js"]);
     //["html/namedialog.html"]);
 }, false);
+
+*/

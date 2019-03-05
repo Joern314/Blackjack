@@ -24,6 +24,8 @@ let InfiniteScrolling = (function () {
     };
 })();
 
+/**
 window.addEventListener("load", function(){
     Blackjack.addAddon("addons/infinitescrolling.js", InfiniteScrolling.OnInit, []);
 }, false);
+*/

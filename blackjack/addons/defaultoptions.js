@@ -140,6 +140,8 @@ let DefaultOptions = function () {
     };
 }();
 
+/*
 window.addEventListener("load", function () {
     Blackjack.addAddon("addons/defaultoptions.js", DefaultOptions.OnInit, []);
 }, false);
+*/
