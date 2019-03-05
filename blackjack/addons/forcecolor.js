@@ -37,7 +37,8 @@ let ForceColor = (function () {
         OverrideName: OverrideName
     };
 })();
-
+/**
 window.addEventListener("load", function(){
     Blackjack.addAddon("addons/forcecolor.js", ForceColor.OnInit, []);
 }, false);
+*/

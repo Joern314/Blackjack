@@ -129,7 +129,9 @@ let NameDialog = (function () {
     };
 })();
 
+/**
 window.addEventListener("load", function () {
     Blackjack.addAddon("addons/namedialog.js", NameDialog.OnInit, []);
     //["html/namedialog.html"]);
 }, false);
+*/

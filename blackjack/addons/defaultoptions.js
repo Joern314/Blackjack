@@ -1,6 +1,8 @@
 /* global ChatColor, defaults */
 
 //window.addEventListener("load", OnInit_defaultoptions, false);
+
+/**
 OnInit_defaultoptions();
 
 function OnInit_defaultoptions() {
@@ -19,3 +21,4 @@ function injectDefaultOptions() {
     
     LoadOptions();
 }
+*/

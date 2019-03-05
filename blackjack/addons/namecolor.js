@@ -19,10 +19,11 @@ let NameColor = (function () {
     };
 })();
 
+/**
 window.addEventListener("load", function(){
     Blackjack.addAddon("addons/namecolor.js", NameColor.OnInit, []);
 }, false);
-
+*/
 
 /*
  function rebuildUsernamesDatalist() {
