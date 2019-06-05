@@ -2,7 +2,7 @@
 /* global  Blackjack, Observables */
 
 let RemoveSettings = (function () {
-    const removed = ["notifications","favicon","links"];
+    const removed = []; //["notifications","favicon","links"];
     function OnInit() {
         for(let id of removed) {
             document.getElementById(id).parentNode.parentNode.style.display="none";
